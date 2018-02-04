@@ -1,0 +1,141 @@
+﻿spring 整合 shiro:
+
+1: 添加 jar 到 pom.xml里
+
+
+	<properties>
+		<!-- shiro -->
+		<shiro.version>1.4.0</shiro.version>
+	</properties>
+  
+	<!-- shiro -->
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-cas</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-spring</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+	<dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-ehcache</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+
+	
+----------------------------------------------------------------------------------------------------
+
+2： web.xml 里 添加 shiro 的 filter过滤器
+
+
+	<!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 -->  
+	<!-- 这里filter-name必须对应applicationContext.xml中定义的<bean id="shiroFilter"/> -->  
+	<!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 -->  
+	<!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 --> 
+	<filter>
+	    <filter-name>shiroFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	    <init-param>
+	    	<!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由servlet container管理 -->
+	        <param-name>targetFilterLifecycle</param-name>
+	        <param-value>true</param-value>
+	    </init-param>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>shiroFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+----------------------------------------------------------------------------------------------------
+
+3：shiro.xml 配置文件 
+	
+	
+	<?xml version="1.0" encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+		   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:schemaLocation="
+		   http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+			">
+
+		<!-- 自定义认证 -->
+		<bean id="myRealm" class="com.bgee.security.shiro.MyRealm"/>
+
+		<!-- 缓存 -->
+		<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+			<property name="cacheManagerConfigFile" value="classpath:shiro-cache.xml"/>
+		</bean>
+
+		<!-- 安全管理 -->
+		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+			<property name="realm" ref="myRealm"/>
+			<property name="cacheManager" ref="shiroEhcacheManager"/>
+		</bean>
+
+		<!-- shiro 过滤器 -->
+		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+			<!-- 安全管理器 -->
+			<property name="securityManager" ref="securityManager"/>
+			<!-- 没有认证返回地址 -->
+			<property name="loginUrl" value="/pc/login/login.html"/>
+			<!-- 没有授权返回地址 -->
+			<property name="unauthorizedUrl" value="/pc/login/login.html"/>
+			<property name="filterChainDefinitions">
+				<value>
+					/static/** = anon
+					/pc/login/** = anon
+					/** = authc
+				</value>
+			</property>
+		</bean>
+
+
+		<!--用于在实现了Initializable/Destroyable接口的 Shiro bean 初始化时回调-->
+		<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+		<!-- 开启 Shiro  注解 -->
+		<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" >
+			<property name="proxyTargetClass" value="true"/>
+		</bean>
+
+		<!-- 安全管理器 -->
+		<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+			<property name="securityManager" ref="securityManager" />
+		</bean>
+
+	</beans>
+
+
+----------------------------------------------------------------------------------------------------
+
+4：shiro 的缓存文件 shiro-cache.xml
+	
+
+	<ehcache updateCheck="false" name="shiroCache">
+		<defaultCache
+				maxElementsInMemory="10000"
+				eternal="false"
+				timeToIdleSeconds="120"
+				timeToLiveSeconds="120"
+				overflowToDisk="false"
+				diskPersistent="false"
+				diskExpiryThreadIntervalSeconds="120"
+		/>
+	</ehcache>
+	
+----------------------------------------------------------------------------------------------------
