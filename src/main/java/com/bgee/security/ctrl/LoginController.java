@@ -19,7 +19,7 @@ public class LoginController {
     @Resource
     private AccountService accountService;
 
-    // login test
+
     @ResponseBody
     @RequestMapping("/login")
     public R login(String account, String pass){
