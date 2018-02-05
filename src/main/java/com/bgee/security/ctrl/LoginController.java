@@ -31,6 +31,7 @@ public class LoginController {
     @RequestMapping("/login")
     public R login(String account, String pass){
         try {
+            //
             Subject subject  = SecurityUtils.getSubject();
             if(subject.isAuthenticated()){
                 return new R(1,"登陸成功");
