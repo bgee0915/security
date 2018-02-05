@@ -4,4 +4,9 @@
    <select id="get" resultType="Account">
      select * from s_account where id = #{id}
    </select>
+
+    <select id="getAccountPass" resultType="Account">
+        select * from s_account where account = #{account} and pass = md5(concat(#{pass},'secret')) and status = 1
+    </select>
+
 </mapper>

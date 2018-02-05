@@ -14,4 +14,8 @@ public class AccountService {
     public Account get(Integer id){
         return accountDao.get(id);
     }
+
+    public Account getAccountPass(String account, String pass){
+        return accountDao.getAccountPass(account,pass);
+    }
 }
