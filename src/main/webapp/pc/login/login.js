@@ -12,7 +12,7 @@ lg.login = function(){
         dataType : 'json',
         success : function(result){
             if(result.ret === 1){
-                window.location.href = '../home/home.html';
+                window.location.href = '../index/index.html';
             } else {
                 alert('账号密码错误');
             }
