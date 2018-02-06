@@ -1,15 +1,16 @@
 $(function(){
     var acct = new Acct;
     acct.list();
-})
+});
 
 
 var Acct = function(){
     'use strict';
 
+
     this.get = function(){
         alert('get');
-    }
+    };
 
     this.list = function(){
         $.ajax({
@@ -18,36 +19,19 @@ var Acct = function(){
             type:'post',
             dataType:'json',
             success:function(result){
-                var html = '';
-                html += '<table><thead><tr><th>'
-                     +  'id' + '</th><th>'
-                     +  '账号' +'</th><th>'
-                     +  '手机号' +'</th><th>'
-                     +  '性别' +'</th><th>'
-                     +  '头像' +'</th><th>'
-                     +  '创建时间' + '</th><th>'
-                     +  '创建人' + '</th></tr></thead><tbody><tr><td>'
+                var tables = $.fn.lx.tables;
+                tables.setting = {
+                    head:['id','账号','手机号码','性别','头像','创建时间','创建人'],
+                    data:result.data,
+                    value:function(item){
+                        return [item.id,item.account,item.tel,item.sex == 0?'女':'男',item.headimg,item.createDate,item.createBy];
+                    }
+                };
+                tables.init('l_div_table');
 
-                if(result.ret === 1 && result.data){
-                    var list = result.data;
-                    $.each(list,function(index,item){
-                        html += item.id + '</td><td>'
-                             + item.account + '</td><td>'
-                             + item.tel + '</td><td>'
-                             + item.sex + '</td><td>'
-                             + item.headimg + '</td><td>'
-                             + item.createDate + '</td><td>'
-                             + item.createBy + '</td></tr>';
-                    });
-
-                    html += '</tbody></table>';
-
-                } else {
-                    html = '';
-                }
-
-                $('#l_div_table').html(html);
             }
         })
     };
-}
+};
+
+
