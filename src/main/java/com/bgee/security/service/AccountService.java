@@ -5,6 +5,7 @@ import com.bgee.security.entity.Account;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -18,4 +19,7 @@ public class AccountService {
     public Account getAccountPass(String account, String pass){
         return accountDao.getAccountPass(account,pass);
     }
+
+    public List<Account> list(){ return accountDao.list(); }
+
 }

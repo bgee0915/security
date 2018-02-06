@@ -19,5 +19,3 @@ lg.login = function(){
         }
     })
 };
-
-console.log(typeof lg);
