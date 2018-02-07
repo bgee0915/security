@@ -7,7 +7,6 @@ $(function(){
 var Acct = function(){
     'use strict';
 
-
     this.get = function(){
         alert('get');
     };

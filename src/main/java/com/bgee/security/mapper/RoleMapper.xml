@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgee.security.dao.RoleDao" >
+    <select id="list" resultType="com.bgee.security.entity.Role">
+        select * from s_role
+    </select>
+
+    <select id="accountRole" resultType="com.bgee.security.entity.Role">
+        select s_role.*
+        from s_account
+        left join s_account_role on s_account.id = s_account_role.account_id
+        left join s_role on s_role.id =  s_account_role.role_id
+        where s_account.id = #{accountId}
+    </select>
+
+
+
+</mapper>

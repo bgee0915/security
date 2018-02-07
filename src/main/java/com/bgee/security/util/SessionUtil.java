@@ -1,5 +1,7 @@
 package com.bgee.security.util;
 
+import com.bgee.security.constants.SessionConstants;
+import com.bgee.security.entity.Account;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -29,6 +31,11 @@ public class SessionUtil {
 
     public static Object get(String key){
         return get().getAttribute(key);
+    }
+
+
+    public static Account getAcct(){
+        return (Account) get(SessionConstants.SESSION_ACCOUNT);
     }
 
 }
