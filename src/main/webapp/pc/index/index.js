@@ -1,12 +1,3 @@
-$(function(){
-    var i = new Index;
-    i.xxx();
-});
-
-var Index = function(){
-    'use strict';
-    this.xxx = function(){}
-};
 
 
 // 菜单点击事件

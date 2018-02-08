@@ -1,18 +1,11 @@
 
 $(function(){
-    var role = new Role;
-    role.list();
+    Role.list();
 });
 
 
-var Role = function(){
-    'use strict';
-
-    this.get = function(){
-        alert('get');
-    };
-
-    this.list = function(){
+var Role = {
+    list : function(){
         $.ajax({
             url: Utils.baseUrl() + 'role/list',
             data:'',
@@ -31,7 +24,9 @@ var Role = function(){
 
             }
         })
-    };
+    },
+
+
 };
 
 

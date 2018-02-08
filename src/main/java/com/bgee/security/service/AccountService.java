@@ -22,5 +22,9 @@ public class AccountService {
 
     public List<Account> list(){ return accountDao.list(); }
 
-    public int del(Integer id){return accountDao.del(id);}
+    public int del(Integer id){return accountDao.del(id); }
+
+    public int insert(Account account){return accountDao.insert(account);}
+
+    public int update(Account account){return accountDao.update(account);}
 }

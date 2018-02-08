@@ -16,4 +16,8 @@ public interface AccountDao {
     List<Account> list();
 
     int del(Integer id);
+
+    int insert(Account account);
+
+    int update(Account account);
 }

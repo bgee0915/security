@@ -2,6 +2,7 @@ package com.bgee.security.ctrl;
 
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
+import com.bgee.security.entity.Account;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,7 @@ public class AccountController {
     }
 
 
-    // 账号列表
+    // 删除列表
     @ResponseBody
     @RequestMapping("/del")
     public R del(Integer id){
@@ -54,4 +55,17 @@ public class AccountController {
             return new R(0,e.getMessage(),false);
         }
     }
+
+    // edit
+    @ResponseBody
+    @RequestMapping("/edit")
+    public R edit(Account account){
+        try {
+            return new R(1,accountService.update(account),true);
+        } catch (Exception e){
+            log.error("AccountController, del , e=" + e.getMessage());
+            return new R(0,e.getMessage(),false);
+        }
+    }
+
 }
