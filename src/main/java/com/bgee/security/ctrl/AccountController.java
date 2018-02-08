@@ -43,4 +43,15 @@ public class AccountController {
     }
 
 
+    // 账号列表
+    @ResponseBody
+    @RequestMapping("/del")
+    public R del(Integer id){
+        try {
+            return new R(1,accountService.del(id),true);
+        } catch (Exception e){
+            log.error("AccountController, del , e=" + e.getMessage());
+            return new R(0,e.getMessage(),false);
+        }
+    }
 }

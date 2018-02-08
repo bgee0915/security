@@ -6,7 +6,7 @@ lg.login = function(){
     var account = $('#account').val();
     var pass = $('#pass').val();
     $.ajax({
-        url : baseUrl + 'login/login',
+        url : Utils.baseUrl() + 'login/login',
         data : {account:account,pass:pass},
         type : 'post',
         dataType : 'json',

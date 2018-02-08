@@ -8,7 +8,7 @@ public class R {
 
     public R(){}
 
-    public R(Integer ret, Boolean success,Object data,String msg){
+    public R(Integer ret, Object data,Boolean success,String msg){
         this.ret = ret;
         this.success = success;
         this.data = data;

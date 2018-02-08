@@ -28,7 +28,6 @@ public class RoleController {
     public R list(){
         try {
             Account acct = SessionUtil.getAcct();
-            log.info("RoleController, list, session acct: " + acct);
             List<Role> list = roleService.accountRole(acct.getId());
             return new R(1,list,true);
         } catch (Exception e){

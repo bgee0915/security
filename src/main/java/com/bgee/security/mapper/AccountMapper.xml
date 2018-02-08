@@ -13,4 +13,8 @@
         select * from s_account where status = 1;
     </select>
 
+    <delete id="del">
+        update s_account set status = 0 where id = #{id}
+    </delete>
+
 </mapper>

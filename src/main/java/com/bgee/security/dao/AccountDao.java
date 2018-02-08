@@ -14,4 +14,6 @@ public interface AccountDao {
     Account getAccountPass(@Param("account")String account,@Param("pass")String pass);
 
     List<Account> list();
+
+    int del(Integer id);
 }
