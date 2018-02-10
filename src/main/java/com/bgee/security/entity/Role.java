@@ -4,6 +4,7 @@ public class Role {
     private Integer id;
     private String name;
     private String keys;
+    private int status;
 
 
     public Integer getId() {
@@ -30,7 +31,13 @@ public class Role {
         this.keys = keys;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -38,6 +45,7 @@ public class Role {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", keys='" + keys + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

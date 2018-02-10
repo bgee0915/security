@@ -4,7 +4,10 @@ var Utils = {
     loadCss : function(url){},                  // 加载css
     getUrlParam : function(name){},             // 获取路径后面的参数
     getCookie : function(name){},               // 获取 cookie 的值
-}
+    check : {
+        validTel : function(tel){}
+    }
+};
 
 
 Utils.baseUrl = function(){
@@ -18,7 +21,7 @@ Utils.baseUrl = function(){
         baseUrl = location.protocol + '//' + location.host + result + '/';
     }
     return baseUrl;
-}
+};
 
 Utils.loadCss = function(url){
     $('<link>').attr({
@@ -26,7 +29,7 @@ Utils.loadCss = function(url){
         type:'text/css',
         href:url
     }).appendTo('head');
-}
+};
 
 // 获取路径后面的参数
 Utils.getUrlParam = function(name){
@@ -36,7 +39,7 @@ Utils.getUrlParam = function(name){
         return unescape(r[2]);
     }
     return "";
-}
+};
 
 // 获取 cookie 的值
 Utils.getCookie = function(name){
@@ -47,5 +50,15 @@ Utils.getCookie = function(name){
         if (arr[0] == name) return arr[1];
     }
     return "";
-}
+};
 
+
+// 检查手机号
+Utils.check.validTel = function(tel){
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    if (myreg.test(tel)) {
+        return true;
+    } else {
+        return false;
+    }
+};

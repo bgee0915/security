@@ -9,9 +9,9 @@ var Edit = {
     edit:function(){},
     data : {
         id : null,
-        account : null,
+        account : null
     }
-}
+};
 
 // 初始化
 Edit.init = function(){
@@ -19,7 +19,7 @@ Edit.init = function(){
     Edit.data.id = id;
     Edit.info();
     Edit.fill();
-}
+};
 
 // 账号信息
 Edit.info = function(){
@@ -37,7 +37,7 @@ Edit.info = function(){
             }
         }
     })
-}
+};
 
 // 信息填充
 Edit.fill = function(){
@@ -48,7 +48,7 @@ Edit.fill = function(){
         $('#headimg').attr('src',acct.headimg);
         $('input:radio[name=sex][value='+ acct.sex +']').attr('checked',true);
     }
-}
+};
 
 // 编辑保存
 Edit.edit = function(){
@@ -57,7 +57,6 @@ Edit.edit = function(){
     acct.id = account.id;
     acct.account = $('#account').val();
     acct.tel = $('#tel').val();
-    acct.headimg = $('#headimg').attr('src');
     acct.sex = $('input:radio[name=sex]:checked').val();
 
     $.ajax({
@@ -78,9 +77,9 @@ Edit.edit = function(){
             }
         }
     });
-}
+};
 
 // 编辑点击事件
 $('.l_bt_edit').click(function(){
     Edit.edit();
-})
+});

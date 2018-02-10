@@ -5,11 +5,13 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.entity.Account;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
+import com.bgee.security.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/account")
@@ -44,7 +46,7 @@ public class AccountController {
     }
 
 
-    // 删除列表
+    // del
     @ResponseBody
     @RequestMapping("/del")
     public R del(Integer id){
@@ -63,7 +65,25 @@ public class AccountController {
         try {
             return new R(1,accountService.update(account),true);
         } catch (Exception e){
-            log.error("AccountController, del , e=" + e.getMessage());
+            log.error("Acco untController, edit , e=" + e.getMessage());
+            return new R(0,e.getMessage(),false);
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/add")
+    public R add(Account account){
+        try {
+            Date date = new Date();
+            Account sessionAcct = SessionUtil.getAcct();
+            account.setCreateDate(date);
+            account.setModifyDate(date);
+            account.setModifyBy(sessionAcct.getAccount());
+            account.setCreateBy(sessionAcct.getAccount());
+            return new R(1, accountService.insert(account),true);
+        } catch (Exception e){
+            log.error("AccountController, add, e=", e);
             return new R(0,e.getMessage(),false);
         }
     }

@@ -8,7 +8,6 @@ public class Account {
     private String pass;
     private String tel;
     private Integer sex;
-    private String headimg;
     private Integer status;
     private Date createDate;
     private String createBy;
@@ -53,14 +52,6 @@ public class Account {
 
     public void setSex(Integer sex) {
         this.sex = sex;
-    }
-
-    public String getHeadimg() {
-        return headimg;
-    }
-
-    public void setHeadimg(String headimg) {
-        this.headimg = headimg;
     }
 
     public Integer getStatus() {
@@ -111,7 +102,6 @@ public class Account {
                 ", pass='" + pass + '\'' +
                 ", tel='" + tel + '\'' +
                 ", sex=" + sex +
-                ", headimg='" + headimg + '\'' +
                 ", status=" + status +
                 ", createDate=" + createDate +
                 ", createBy='" + createBy + '\'' +

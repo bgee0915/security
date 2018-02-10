@@ -7,7 +7,7 @@ var Acct = {
     list : function(){},
     del : function(){},
     toEdit : function(){},
-}
+};
 
 Acct.list = function(){
     $.ajax({
@@ -18,7 +18,7 @@ Acct.list = function(){
         success:function(result){
             var tables = $.fn.lx.tables;
             tables.setting = {
-                head:['id','账号','手机号码','性别','头像','创建时间','创建人','操作'],
+                head:['id','账号','手机号码','性别', '创建时间','创建人','操作'],
                 data:result.data,
                 value:function(item){
                     return [
@@ -26,12 +26,11 @@ Acct.list = function(){
                         item.account,
                         item.tel,
                         item.sex === 0 ? '女':'男',
-                        item.headimg,
                         item.createDate,
                         item.createBy,
                         (function(id){
                             var html = '';
-                            html += '<a href="javascript:void(0)" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;'
+                            html += '<a href="javascript:void(0)" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
                             html += '<a href="javascript:void(0)" onclick="Acct.del('+id+')">删除</a>';
                             return html;
                         })(item.id)
@@ -56,12 +55,14 @@ Acct.del = function(id){
             } else {
                 alert('刪除失敗');
             }
-            new Acct().list();
+           Acct.list();
         }
     })
 };
 
-
+Acct.toAdd =  function(){
+    window.location.href= 'add.html';
+};
 
 Acct.toEdit = function(id){
     window.location.href = 'edit.html?id='+id;
