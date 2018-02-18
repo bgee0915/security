@@ -1,8 +1,9 @@
+/*  */
 .l_pub_head_div{
     margin-bottom:10px;
 }
 
-
+/* 列表添加按钮 */
 .l_pub_df_bt{
     width: 120px;
     height: 35px;
@@ -14,3 +15,43 @@
     font-size: 15px;
 }
 
+/* save 确定按钮 */
+.l_pub_y_bt{
+    width: 70px;
+    height: 25px;
+    background: pink;
+    border: 0px;
+    border-radius: 5px;
+    color: #FFFFF0;
+}
+
+/* save 取消按钮 */
+.l_pub_n_bt{
+    width: 70px;
+    height: 25px;
+    background-color: #ffffff;
+    border: 1px solid pink;
+    color: pink;
+    border-radius: 5px;
+}
+
+/* table 的 a标签 */
+.l_pub_df_a{
+    text-decoration:none;
+    color:#000000;
+}
+
+/* save label 标签 */
+.l_pub_save_div > div > label{
+    display: inline-table;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    font-size: 16px;
+}
+
+/* save input 标签 */
+.l_pub_save_div > div > input{
+    font-size: 16px;
+}

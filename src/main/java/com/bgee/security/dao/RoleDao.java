@@ -12,4 +12,17 @@ public interface RoleDao {
     // 账号的角色列
     List<Role> accountRole(@Param("accountId") Integer accountId);
 
+    int insert(Role role);
+
+    int update(Role role);
+
+    int del(int id);
+
+    int delRole(int id);
+
+    int delAccountRole(@Param("accountId")Integer accountId, @Param("roleId")Integer roleId);
+
+    Role get(Integer id);
+    Role get4Key(@Param("keys")String keys);
+
 }

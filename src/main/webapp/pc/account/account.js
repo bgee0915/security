@@ -5,8 +5,9 @@ $(function(){
 
 var Acct = {
     list : function(){},
-    del : function(){},
-    toEdit : function(){},
+    del : function(id){},
+    toEdit : function(id){},
+    toAdd:function () {}
 };
 
 Acct.list = function(){
@@ -30,8 +31,8 @@ Acct.list = function(){
                         item.createBy,
                         (function(id){
                             var html = '';
-                            html += '<a href="javascript:void(0)" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
-                            html += '<a href="javascript:void(0)" onclick="Acct.del('+id+')">删除</a>';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Acct.del('+id+')">删除</a>';
                             return html;
                         })(item.id)
                     ];

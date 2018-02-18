@@ -4,7 +4,7 @@ public class Role {
     private Integer id;
     private String name;
     private String keys;
-    private int status;
+    private Integer status;
 
 
     public Integer getId() {
@@ -31,11 +31,12 @@ public class Role {
         this.keys = keys;
     }
 
-    public int getStatus() {
+
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

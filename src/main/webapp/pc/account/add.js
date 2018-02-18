@@ -1,5 +1,6 @@
 var Add = {
-    add:function(){}
+    add:function(){},
+    cancel:function(){}
 };
 
 // 保存
@@ -52,7 +53,7 @@ Add.add = function(){
     });
 };
 
-// 添加按钮点击
-$('.l_bt_add').click(function(){
-    Add.add();
-});
+Add.cancel = function(){
+    $('input').val('');
+};
+

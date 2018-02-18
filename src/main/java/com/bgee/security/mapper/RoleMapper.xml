@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bgee.security.dao.RoleDao" >
+
+
+    <select id="get" resultType="com.bgee.security.entity.Role">
+        select * from s_role where id = #{id}
+    </select>
+    <select id="get4Key" resultType="com.bgee.security.entity.Role">
+        select * from s_role where `keys` = #{keys}
+    </select>
+
     <select id="list" resultType="com.bgee.security.entity.Role">
         select * from s_role
     </select>
@@ -11,8 +20,67 @@
         left join s_account_role on s_account.id = s_account_role.account_id
         left join s_role on s_role.id =  s_account_role.role_id
         where s_account.id = #{accountId}
+        and s_role.status = 1
     </select>
 
+    <insert id="insert" parameterType="com.bgee.security.entity.Role" useGeneratedKeys="true" keyProperty="id" >
+        insert into s_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="keys != null" >
+                `keys`,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keys != null" >
+                #{keys,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
+    <update id="update" parameterType="com.bgee.security.entity.Role" >
+        update s_role
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keys != null" >
+                `keys` = #{keys,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="del">
+        update s_role set status = 0 where id = #{id}
+    </update>
+
+    <delete id="delRole">
+        delete from s_account_role where role_id = #{id}
+    </delete>
+
+    <delete id="delAccountRole">
+        delete from s_account_role where account_id = #{accountId} and role_id = #{roleId}
+    </delete>
 
 </mapper>
