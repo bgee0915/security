@@ -7,6 +7,7 @@ var Edit = {
     info:function(){},
     fill:function(){},
     edit:function(){},
+    cancel:function(){},
     data : {
         id : null,
         account : null
@@ -79,7 +80,7 @@ Edit.edit = function(){
     });
 };
 
-// 编辑点击事件
-$('.l_bt_edit').click(function(){
-    Edit.edit();
-});
+Edit.cancel = function(){
+    $('input').val('');
+};
+

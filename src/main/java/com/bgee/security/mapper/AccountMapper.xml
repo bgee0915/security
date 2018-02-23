@@ -9,6 +9,14 @@
         select * from s_account where account = #{account} and pass = md5(concat(#{pass},'secret')) and status = 1
     </select>
 
+    <select id="get4Tel" resultType="Account">
+        select * from s_account where tel = #{tel} and status = 1
+    </select>
+
+    <select id="get4Account" resultType="Account">
+        select * from s_account where account = #{account} and status = 1
+    </select>
+
     <select id="list" resultType="Account">
         select * from s_account where status = 1;
     </select>
@@ -60,7 +68,7 @@
                 #{account,jdbcType=VARCHAR},
             </if>
             <if test="pass != null" >
-                #{pass,jdbcType=VARCHAR},
+                md5(concat(#{pass},'secret')),
             </if>
             <if test="tel != null" >
                 #{tel,jdbcType=VARCHAR},
@@ -92,7 +100,7 @@
                 account = #{account,jdbcType=VARCHAR},
             </if>
             <if test="pass != null" >
-                pass = #{pass,jdbcType=VARCHAR},
+                pass = md5(concat(#{pass},'secret')),
             </if>
             <if test="tel != null" >
                 tel = #{tel,jdbcType=VARCHAR},
@@ -118,5 +126,12 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <insert id="insertAcctRoles">
+      insert into s_account_role (account_id,role_id) values
+      <foreach collection="roles" item="roleId" index="index" separator=",">
+          (#{accountId},#{roleId})
+      </foreach>
+    </insert>
 
 </mapper>

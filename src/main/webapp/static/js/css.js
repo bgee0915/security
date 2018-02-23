@@ -1,5 +1,5 @@
 
-// 自定义 table 插件
+// 自定义 table
 $.fn.lx = {
     tables : {
         setting :{

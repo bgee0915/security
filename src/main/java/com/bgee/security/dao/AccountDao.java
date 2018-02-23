@@ -11,6 +11,10 @@ public interface AccountDao {
 
     Account get(Integer id);
 
+    Account get4Tel(String tel);
+
+    Account get4Account(String account);
+
     Account getAccountPass(@Param("account")String account,@Param("pass")String pass);
 
     List<Account> list();
@@ -20,4 +24,6 @@ public interface AccountDao {
     int insert(Account account);
 
     int update(Account account);
+
+    int insertAcctRoles(@Param("accountId")Integer accountId, @Param("roles")Integer roles[]);
 }

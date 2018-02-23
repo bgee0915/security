@@ -12,6 +12,8 @@ public interface RoleDao {
     // 账号的角色列
     List<Role> accountRole(@Param("accountId") Integer accountId);
 
+    List<Role> list();
+
     int insert(Role role);
 
     int update(Role role);

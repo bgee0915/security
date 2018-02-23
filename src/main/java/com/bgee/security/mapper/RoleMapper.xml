@@ -11,7 +11,7 @@
     </select>
 
     <select id="list" resultType="com.bgee.security.entity.Role">
-        select * from s_role
+        select * from s_role where status = 1
     </select>
 
     <select id="accountRole" resultType="com.bgee.security.entity.Role">

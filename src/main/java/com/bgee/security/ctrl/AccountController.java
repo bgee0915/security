@@ -8,6 +8,7 @@ import com.bgee.security.service.AccountService;
 import com.bgee.security.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -73,7 +74,7 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping("/add")
-    public R add(Account account){
+    public R add(Account account, @RequestParam(value="roles[]")Integer[] roles){
         try {
             Date date = new Date();
             Account sessionAcct = SessionUtil.getAcct();
@@ -81,7 +82,12 @@ public class AccountController {
             account.setModifyDate(date);
             account.setModifyBy(sessionAcct.getAccount());
             account.setCreateBy(sessionAcct.getAccount());
-            return new R(1, accountService.insert(account),true);
+            int result = accountService.insertAcctInfo(account,roles);
+            if(result > 0){
+                return new R(1 ,"");
+            } else {
+                return new R(0, "");
+            }
         } catch (Exception e){
             log.error("AccountController, add, e=", e);
             return new R(0,e.getMessage(),false);

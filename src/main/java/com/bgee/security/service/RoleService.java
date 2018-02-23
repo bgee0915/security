@@ -21,6 +21,8 @@ public class RoleService {
         return roleDao.accountRole(accountId);
     }
 
+    public List<Role> list(){return roleDao.list();}
+
     public int insert(Role role){return roleDao.insert(role);}
 
     public int update(Role role){return roleDao.update(role);}

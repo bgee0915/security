@@ -36,11 +36,24 @@ public class RoleController {
     }
 
     @ResponseBody
-    @RequestMapping("/list")
-    public R list(){
+    @RequestMapping("/accountRole")
+    public R accountRole(){
         try {
             Account acct = SessionUtil.getAcct();
             List<Role> list = roleService.accountRole(acct.getId());
+            return new R(1,list,true);
+        } catch (Exception e){
+            log.error("RoleController, accountRole, e, " , e);
+            return new R(0,e.getMessage(),false);
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/list")
+    public R list(){
+        try {
+            List<Role> list = roleService.list();
             return new R(1,list,true);
         } catch (Exception e){
             log.error("RoleController, list, e, " , e);
