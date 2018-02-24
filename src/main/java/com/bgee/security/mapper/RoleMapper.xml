@@ -80,7 +80,10 @@
     </delete>
 
     <delete id="delAccountRole">
-        delete from s_account_role where account_id = #{accountId} and role_id = #{roleId}
+        delete from s_account_role where account_id = #{accountId}
+        <if test="roleId != null and roleId > 0">
+          and role_id = #{roleId}
+        </if>
     </delete>
 
 </mapper>

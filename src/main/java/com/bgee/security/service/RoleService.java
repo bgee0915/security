@@ -36,8 +36,6 @@ public class RoleService {
     // delete from s_account_role where account_id = #{accountId} and role_id = #{roleId}
     public int delAccountRole(Integer accountId, Integer roleId){return roleDao.delAccountRole(accountId,roleId);}
 
-
-
     // TODO
     @Transactional
     public int delete(int id){
