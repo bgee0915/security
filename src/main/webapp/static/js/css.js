@@ -30,7 +30,7 @@ $.fn.lx = {
                 "width":"100%",
                 "border-top":"1px solid #ccc",
                 "border-left":"1px solid #ccc"
-            })
+            });
             $('#l_lx_tb tr:even').css("background-color","#F9F9F9");
             $('#l_lx_tb tr:odd').css("background-color","#FFFFFF");
             $('#l_lx_tb tr th').css({
@@ -42,7 +42,7 @@ $.fn.lx = {
                 'font-weight':'bold',
                 "border-right":"1px solid #ccc",
                 "border-bottom":"1px solid #ccc"
-            })
+            });
             $('#l_lx_tb tr td').css(
                 {
                     'border': '0px solid #FFFFFF ',

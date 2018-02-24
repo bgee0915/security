@@ -3,7 +3,6 @@ package com.bgee.security.entity.dto;
 import com.bgee.security.entity.Account;
 import com.bgee.security.entity.Role;
 
-import java.util.Date;
 import java.util.List;
 
 public class AccountDto extends Account{

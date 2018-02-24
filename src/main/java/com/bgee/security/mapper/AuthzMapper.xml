@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgee.security.dao.AuthzDao" >
+
+    <select id="get" resultType="Authz">
+        select * from s_authz where id = #{id} and status = 1
+    </select>
+
+    <select id="list" resultType="AuthzDto">
+        select s1.* ,s2.name as pName
+        from s_authz as s1
+        left join s_authz as s2 on s1.pid = s2.id
+        and s1.pid > 0
+        and s1.status = 1
+        and s2.status = 1
+    </select>
+
+    <delete id="del">
+        delete from s_authz where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="Authz" useGeneratedKeys="true" keyProperty="id">
+        insert into s_authz
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="pid != null" >
+                pid,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="keys != null" >
+                `keys`,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null" >
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keys != null" >
+                #{keys,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="Authz" >
+        update s_authz
+        <set >
+            <if test="pid != null" >
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="keys != null" >
+                `keys` = #{keys,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>
