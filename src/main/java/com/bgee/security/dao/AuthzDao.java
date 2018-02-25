@@ -15,6 +15,8 @@ public interface AuthzDao {
 
     int del(Integer id);
 
+    int delSon(Integer pid);
+
     int insert(Authz authz);
 
     int update(Authz authz);

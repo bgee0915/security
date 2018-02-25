@@ -83,7 +83,7 @@ Authz.del = function(id){
         type:'post',
         dataType:'json',
         success:function(result){
-            if(result.ret === 1 && result.data > 0){
+            if(result.ret === 1){
                 alert('刪除成功');
             } else {
                 alert('刪除失敗');

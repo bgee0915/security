@@ -76,4 +76,8 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <delete id="delSon">
+        delete from s_authz where pid = #{pid};
+    </delete>
+
 </mapper>

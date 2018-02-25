@@ -116,7 +116,7 @@ Edit.edit = function(){
         dataType:'json',
         async:false,
         success:function(result){
-            if(result.ret === 1 && result.data > 0){
+            if(result.ret === 1){
                 alert('保存成功');
                 setTimeout(function(){
                     window.location.href = 'account.html';

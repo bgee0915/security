@@ -64,5 +64,14 @@ public class AuthzController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping("/del")
+    public R del(Integer id){
+        try{
+            return new R(authzService.delete(id),"");
+        }catch(Exception e){
+            return new R(0,e.getMessage());
+        }
+    }
 
 }

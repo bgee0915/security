@@ -20,6 +20,16 @@ public class AuthzService {
 
     public int del(Integer id){return authzDao.del(id);}
 
+    public int delSon(Integer pid){return authzDao.delSon(pid);}
+
+    public int delete(Integer id){
+        Authz authz = get(id);
+        if(authz.getPid() == 0){
+            delSon(id);
+        }
+        return del(id);
+    }
+
     public int insert(Authz authz){return authzDao.insert(authz);}
 
     public int update(Authz authz){return authzDao.update(authz);}
