@@ -11,6 +11,7 @@ import com.bgee.security.util.SessionUtil;
 import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -36,6 +37,17 @@ public class RoleController {
     }
 
     @ResponseBody
+    @RequestMapping("/gets")
+    public R gets(Integer id){
+        try {
+            return new R(1,roleService.gets(id),true);
+        } catch (Exception e){
+            log.error("RoleController, get, e, " , e);
+            return new R(0,e.getMessage(),false);
+        }
+    }
+
+    @ResponseBody
     @RequestMapping("/accountRole")
     public R accountRole(){
         try {
@@ -48,7 +60,6 @@ public class RoleController {
         }
     }
 
-
     @ResponseBody
     @RequestMapping("/list")
     public R list(){
@@ -60,7 +71,6 @@ public class RoleController {
             return new R(0,e.getMessage(),false);
         }
     }
-
 
     @ResponseBody
     @RequestMapping("/del")
@@ -76,11 +86,11 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/add")
-    public R add(Role role){
+    public R add(Role role, @RequestParam(value="authz[]")Integer []authz){
         try {
             Role selRole = roleService.get4Key(role.getKeys());
             if(selRole == null){
-                return new R(roleService.insert(role),"");
+                return new R(roleService.insertRoleInfo(role, authz),"");
             } else {
                 log.error("RoleController, add, 存在的keys");
                return new R(0,"存在的keys");
@@ -91,12 +101,11 @@ public class RoleController {
         }
     }
 
-
     @ResponseBody
     @RequestMapping("/edit")
-    public R edit(Role role){
+    public R edit(Role role, @RequestParam(value="authz[]")Integer []authz){
         try {
-            return new R(roleService.update(role),"");
+            return new R(roleService.updateRoleInfo(role,authz),"");
         } catch (Exception e){
             log.error("RoleController, edit, e, " , e);
             return new R(0,e.getMessage(),false);

@@ -15,6 +15,16 @@
         and s2.status = 1
     </select>
 
+    <select id="getRoleAuthz" resultType="Authz">
+        select s_authz.*
+        from s_role
+        left join s_role_authz on s_role.id = s_role_authz.role_id
+        left join s_authz on s_authz.id = s_role_authz.authz_id
+        where s_role.id = #{roleId}
+        and s_authz.status = 1
+        and s_role.status = 1
+    </select>
+
     <delete id="del">
         delete from s_authz where id = #{id,jdbcType=INTEGER}
     </delete>
@@ -78,6 +88,16 @@
 
     <delete id="delSon">
         delete from s_authz where pid = #{pid};
+    </delete>
+
+    <delete id="delRoleAuthz">
+        delete from s_role_authz where 1=1
+        <if test="roleId != null and roleId > 0">
+            and  role_id = #{roleId}
+        </if>
+        <if test="authzId != null and authzId > 0">
+            and authz_id = #{authzId}
+        </if>
     </delete>
 
 </mapper>

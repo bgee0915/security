@@ -52,8 +52,6 @@ public class AccountService {
         return result1 > 0 && result2 > 0 ? 1 : 0;
     }
 
-    public int insert(Account account){return accountDao.insert(account);}
-
     public int update(Account account){return accountDao.update(account);}
 
     public int updateAcctInfo(Account account, Integer roles[]){
@@ -63,6 +61,8 @@ public class AccountService {
         return result1 > 0 && result2 > 0 && result3 > 0 ? 1 : 0;
     }
 
+    public int insert(Account account){return accountDao.insert(account);}
+
     public int insertAcctRoles(Integer accountId, Integer roles[]){return accountDao.insertAcctRoles(accountId,roles);}
 
     public int insertAcctInfo(Account account, Integer roles[]){
@@ -70,6 +70,5 @@ public class AccountService {
         int result2 = insertAcctRoles(account.getId(),roles);
         return result1 > 0 && result2 > 0 ?  1 : 0;
     }
-
 
 }

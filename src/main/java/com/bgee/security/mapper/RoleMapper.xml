@@ -55,6 +55,13 @@
         </trim>
     </insert>
 
+    <insert id="insertRoleAuthz">
+        insert into s_role_authz(role_id,authz_id) values
+        <foreach collection="authz" item="authzId" index="index" separator=",">
+            (#{roleId},#{authzId})
+        </foreach>
+    </insert>
+
     <update id="update" parameterType="com.bgee.security.entity.Role" >
         update s_role
         <set >
@@ -85,5 +92,6 @@
           and role_id = #{roleId}
         </if>
     </delete>
+
 
 </mapper>

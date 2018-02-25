@@ -16,6 +16,8 @@ public interface RoleDao {
 
     int insert(Role role);
 
+    int insertRoleAuthz(@Param("roleId")Integer roleId, @Param("authz")Integer authz[]);
+
     int update(Role role);
 
     int del(int id);

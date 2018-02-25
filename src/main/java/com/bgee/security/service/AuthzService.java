@@ -18,19 +18,26 @@ public class AuthzService {
 
     public List<AuthzDto> list(){return authzDao.list();}
 
+    public List<Authz> getRoleAuthz(Integer roleId){ return authzDao.getRoleAuthz(roleId); }
+
     public int del(Integer id){return authzDao.del(id);}
 
     public int delSon(Integer pid){return authzDao.delSon(pid);}
+
+    public int delRoleAuthz(Integer roleId, Integer authzId){ return authzDao.delRoleAuthz(roleId,authzId); }
 
     public int delete(Integer id){
         Authz authz = get(id);
         if(authz.getPid() == 0){
             delSon(id);
         }
-        return del(id);
+        del(id);
+        return delRoleAuthz(null,id);
     }
 
     public int insert(Authz authz){return authzDao.insert(authz);}
 
     public int update(Authz authz){return authzDao.update(authz);}
+
+
 }

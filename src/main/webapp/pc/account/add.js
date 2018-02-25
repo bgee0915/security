@@ -78,7 +78,7 @@ Add.add = function(){
         alert('性别不对，请重新输入');
         return false;
     }
-    if(!roles){
+    if(!roles || roles.length < 1){
         alert('请选择角色');
         return false;
     }
