@@ -57,15 +57,11 @@ Authz.list = function(){
                         (function(item){
                             var html = '';
                             if(item.pid === 0){
-                                html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Authz.toAdd('+item.id+')">添加</a>&nbsp;&nbsp;';
-                                html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Authz.toEdit('+item.id+')">修改</a>&nbsp;&nbsp;';
-                                html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Authz.del('+item.id+')">删除</a>';
-                                return html;
-                            } else {
-                                html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Authz.toEdit('+item.id+')">修改</a>&nbsp;&nbsp;';
-                                html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Authz.del('+item.id+')">删除</a>';
-                                return html;
+                                html += '<a href="javascript:void(0)" class="l_pub_df_a pm a_authz_add" onclick="Authz.toAdd('+item.id+')">添加</a>&nbsp;&nbsp;';
                             }
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a pm a_authz_edit" onclick="Authz.toEdit('+item.id+')">修改</a>&nbsp;&nbsp;';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a pm a_authz_del" onclick="Authz.del('+item.id+')">删除</a>';
+                            return html;
                         })(item)
                     ];
                 }

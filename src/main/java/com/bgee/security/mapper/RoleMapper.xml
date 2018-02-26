@@ -78,9 +78,9 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="del">
-        update s_role set status = 0 where id = #{id}
-    </update>
+    <delete id="del">
+        delete from  s_role  where id = #{id}
+    </delete>
 
     <delete id="delRole">
         delete from s_account_role where role_id = #{id}

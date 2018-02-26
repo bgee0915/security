@@ -5,6 +5,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.entity.Account;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
+import com.bgee.security.util.SessionUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -58,6 +59,17 @@ public class LoginController {
             log.error("LoginController, login, account=" + account + ", pass=" + pass + ",  e=" , e);
             e.printStackTrace();
             return new R(0,e.getMessage(),false);
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/accountAuthz")
+    public R accountAuthz (){
+        try{
+            Account account = SessionUtil.getAcct();
+            return new R(1,accountService.accountAuthz(account.getId()),true);
+        }catch (Exception e){
+            return new R(0,e.getMessage());
         }
     }
 }

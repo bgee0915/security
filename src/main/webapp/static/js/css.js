@@ -59,3 +59,60 @@ $.fn.lx = {
 };
 
 
+var authzList = [];
+var filterPm = function(){
+    var baseUrl;
+    var pathName = document.location.pathname;
+    var index = pathName.substr(1).indexOf("/");
+    var result = pathName.substr(0, index + 1);
+    if (document.location.origin) {
+        baseUrl = document.location.origin + result + '/';
+    } else {
+        baseUrl = location.protocol + '//' + location.host + result + '/';
+    }
+
+    $.ajax({
+        url: baseUrl + 'login/accountAuthz',
+        data:'',
+        dataType:'json',
+        type:'post',
+        async:false,
+        success:function(result){
+            if(result.ret === 1){
+                $.each(result.data,function(index,item){
+                    authzList.push(item.keys);
+                });
+            } else {
+                alert('初始化权限失败');
+                return false;
+            }
+        }
+    });
+
+    var pm = $('.pm');
+    $.each(pm,function(index,item){
+        var that = $(this);
+        var curr = $(this).attr('class');
+        var currPmArray = $.trim(curr.split('pm ')[1]).split(' ');
+        $.each(currPmArray, function(currIndex, currItem){
+            if($.inArray(currItem,authzList) < 0){
+                // that.css("display","none");
+            }
+        })
+    });
+
+    var style = '.pm {display:none;}\n';
+    for (var i in authzList) {
+        style += '.pm.' + authzList[i] + ' {display:block;}\n';
+        style += '.btn.pm.' + authzList[i] + ' {display:inline-block;}\n';
+        style += 'a.pm.' + authzList[i] + ' {display:inline;}\n';
+        style += 'table.pm.' + authzList[i] + ' {display:table;}\n';
+    }
+    var D = document,
+    styleDom = D.createElement('style');
+    styleDom.setAttribute("type", "text/css");
+    styleDom.styleSheet && ($.styleSheet.cssText = css)
+    || styleDom.appendChild(D.createTextNode(style));
+    D.getElementsByTagName('head')[0].appendChild(styleDom);
+};
+filterPm();

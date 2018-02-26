@@ -8,6 +8,7 @@ import com.bgee.security.entity.Role;
 import com.bgee.security.service.AccountService;
 import com.bgee.security.service.RoleService;
 import com.bgee.security.util.SessionUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +56,7 @@ public class AccountController {
     // 账号列表
     @ResponseBody
     @RequestMapping("/list")
+    @RequiresPermissions("a_account_list")
     public R list(){
         try {
             return new R(1,accountService.list(),true);
@@ -68,6 +70,7 @@ public class AccountController {
     // del
     @ResponseBody
     @RequestMapping("/del")
+    @RequiresPermissions("a_account_del")
     public R del(Integer id){
         try {
             return new R(1,accountService.delete(id),true);
@@ -80,6 +83,7 @@ public class AccountController {
     // edit
     @ResponseBody
     @RequestMapping("/edit")
+    @RequiresPermissions("a_account_edit")
     public R edit(Account account, @RequestParam(value="roles[]")Integer[] roles){
         try {
             return new R(1,accountService.updateAcctInfo(account,roles),true);
@@ -92,6 +96,7 @@ public class AccountController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @RequiresPermissions("a_account_add")
     public R add(Account account, @RequestParam(value="roles[]")Integer[] roles){
         try {
             Date date = new Date();

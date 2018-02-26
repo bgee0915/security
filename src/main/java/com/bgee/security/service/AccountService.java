@@ -4,12 +4,15 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.dao.AccountDao;
 import com.bgee.security.entity.Account;
+import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.Role;
 import com.bgee.security.entity.dto.AccountDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AccountService {
@@ -69,6 +72,11 @@ public class AccountService {
         int result1 = insert(account);
         int result2 = insertAcctRoles(account.getId(),roles);
         return result1 > 0 && result2 > 0 ?  1 : 0;
+    }
+
+
+    public List<Authz> accountAuthz(Integer accountId){
+        return  accountDao.accountAuthz(accountId);
     }
 
 }

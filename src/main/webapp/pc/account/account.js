@@ -1,5 +1,7 @@
 $(function(){
     Acct.list();
+
+    console.log('---aaaaaa');
 });
 
 
@@ -31,8 +33,8 @@ Acct.list = function(){
                         item.createBy,
                         (function(id){
                             var html = '';
-                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
-                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Acct.del('+id+')">删除</a>';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a pm a_account_edit" name="fixed" onclick="Acct.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a pm a_account_del" onclick="Acct.del('+id+')">删除</a>';
                             return html;
                         })(item.id)
                     ];
@@ -40,7 +42,7 @@ Acct.list = function(){
             };
             tables.init('l_div_table');
         }
-    })
+    });
 };
 
 

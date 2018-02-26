@@ -134,4 +134,16 @@
       </foreach>
     </insert>
 
+    <select id="accountAuthz" resultType="Authz">
+        select distinct s_authz.* from s_authz
+        left join s_role_authz on s_authz.id = s_role_authz.authz_id
+        left join s_role on s_role.id = s_role_authz.role_id
+        left join s_account_role on s_account_role.role_id = s_role.id
+        left join s_account on s_account_role.account_id = s_account.id
+        where s_account.id = #{accountId}
+        and s_role.status = 1
+        and s_account.status = 1
+        and s_authz.status = 1
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.bgee.security.dao;
 
 import com.bgee.security.entity.Account;
+import com.bgee.security.entity.Authz;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,6 @@ public interface AccountDao {
     int update(Account account);
 
     int insertAcctRoles(@Param("accountId")Integer accountId, @Param("roles")Integer roles[]);
+
+    List<Authz> accountAuthz(Integer accountId);
 }

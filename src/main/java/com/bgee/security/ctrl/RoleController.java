@@ -8,6 +8,7 @@ import com.bgee.security.entity.R;
 import com.bgee.security.entity.Role;
 import com.bgee.security.service.RoleService;
 import com.bgee.security.util.SessionUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/list")
+    @RequiresPermissions("a_role_list")
     public R list(){
         try {
             List<Role> list = roleService.list();
@@ -74,10 +76,10 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/del")
+    @RequiresPermissions("a_role_del")
     public R del(Integer id){
         try {
-            Account acct = SessionUtil.getAcct();
-            return new R(roleService.delAccountRole(acct.getId(),id),"");
+            return new R(roleService.delete(id),"");
         } catch (Exception e){
             log.error("RoleController, del, e, " , e);
             return new R(0,e.getMessage(),false);
@@ -86,6 +88,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @RequiresPermissions("a_role_add")
     public R add(Role role, @RequestParam(value="authz[]")Integer []authz){
         try {
             Role selRole = roleService.get4Key(role.getKeys());
@@ -103,6 +106,7 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping("/edit")
+    @RequiresPermissions("a_role_edit")
     public R edit(Role role, @RequestParam(value="authz[]")Integer []authz){
         try {
             return new R(roleService.updateRoleInfo(role,authz),"");

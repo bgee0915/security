@@ -29,8 +29,8 @@ Role.list = function(){
                         item.keys,
                         (function(id){
                             var html = '';
-                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Role.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
-                            html += '<a href="javascript:void(0)" class="l_pub_df_a" onclick="Role.del('+id+')">删除</a>';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a  pm a_role_edit" onclick="Role.toEdit('+id+')">修改</a>&nbsp;&nbsp;';
+                            html += '<a href="javascript:void(0)" class="l_pub_df_a  pm a_role_del" onclick="Role.del('+id+')">删除</a>';
                             return html;
                         })(item.id)
                     ];

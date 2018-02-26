@@ -5,6 +5,7 @@ import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AuthzService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ public class AuthzController {
 
     @ResponseBody
     @RequestMapping("/list")
+    @RequiresPermissions("a_authz_list")
     public R list(){
         try {
             return new R(1,authzService.list(),true);
@@ -44,6 +46,7 @@ public class AuthzController {
 
     @ResponseBody
     @RequestMapping("/add")
+    @RequiresPermissions("a_authz_add")
     public R add(Authz authz){
         try {
             return new R(1,authzService.insert(authz),true);
@@ -55,6 +58,7 @@ public class AuthzController {
 
     @ResponseBody
     @RequestMapping("/edit")
+    @RequiresPermissions("a_authz_edit")
     public R edit(Authz authz){
         try {
             return new R(1,authzService.update(authz),true);
@@ -66,6 +70,7 @@ public class AuthzController {
 
     @ResponseBody
     @RequestMapping("/del")
+    @RequiresPermissions("a_authz_del")
     public R del(Integer id){
         try{
             return new R(authzService.delete(id),"");
