@@ -20,7 +20,7 @@ public class AuthzController {
     @Resource
     private AuthzService authzService;
 
-
+///r
     @ResponseBody
     @RequestMapping("/list")
     @RequiresPermissions("a_authz_list")
