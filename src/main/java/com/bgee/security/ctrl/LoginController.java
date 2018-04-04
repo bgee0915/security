@@ -18,6 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import javax.jms.Session;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/login")
@@ -71,5 +79,57 @@ public class LoginController {
         }catch (Exception e){
             return new R(0,e.getMessage());
         }
+    }
+
+    /**
+     * 验证码
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/code")
+    public void code(HttpServletRequest request, HttpServletResponse response){
+        try {
+            BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_RGB);
+            Graphics g = bi.getGraphics();
+            Color c = new Color(200, 150, 255);
+            g.setColor(c);
+            g.fillRect(0, 0, 68, 22);
+
+            char[] op = "+-".toCharArray();
+            Random r = new Random();
+            int index, len1 = op.length;
+            int result = 0, firstNum = 0, secondNum = 0;
+            char operation = '0';
+            for (int i = 0; i < 4; i++) {
+                if (i != 1) index = r.nextInt(100);
+                else index = r.nextInt(len1);
+
+                g.setColor(new Color(r.nextInt(88), r.nextInt(188), r.nextInt(255)));
+                if (i == 0) {
+                    g.drawString(index+"", (i*15)+3, 18);
+                    firstNum = index;
+                }
+                else if (i == 2) {
+                    g.drawString(index+"", (i*15)+3, 18);
+                    secondNum = index;
+                }
+                else if (i == 1) {
+                    g.drawString(op[index]+"", (i*15)+3, 18);
+                    operation = op[index];
+                }
+                else {
+                    g.drawString("=", (i*15)+3, 18);
+                }
+            }
+
+            if (operation == '+') result = firstNum+secondNum;
+            else if (operation == '-') result = firstNum-secondNum;
+            else if (operation == '*') result = firstNum*secondNum;
+            SessionUtil.set("loginCode",result);
+            ImageIO.write(bi, "JPG", response.getOutputStream());
+        } catch(IOException ioe){
+            log.error("LoginController, code, ioe,",ioe);
+        }
+
     }
 }

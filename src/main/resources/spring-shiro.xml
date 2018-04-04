@@ -33,6 +33,7 @@
                 /static/** = anon
                 /pc/login/** = anon
                 /login/login = anon
+                /login/code = anon
                 /** = authc
             </value>
         </property>

@@ -1,5 +1,21 @@
+$(function(){
+    lg.init();
+})
+
+
 var lg = {
+    init:function(){},
+    code:function(){},
     login:function(){}
+
+};
+
+lg.init = function(){
+    lg.code();
+};
+
+lg.code = function(){
+    $('#code').attr('src', Utils.baseUrl() + 'login/code?v=' + Math.random());
 };
 
 lg.login = function(){
@@ -19,3 +35,4 @@ lg.login = function(){
         }
     })
 };
+

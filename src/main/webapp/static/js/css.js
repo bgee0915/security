@@ -78,6 +78,7 @@ var filterPm = function(){
         type:'post',
         async:false,
         success:function(result){
+            console.log(result);
             if(result.ret === 1){
                 $.each(result.data,function(index,item){
                     authzList.push(item.keys);
