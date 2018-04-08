@@ -1,6 +1,6 @@
 $(function(){
     lg.init();
-})
+});
 
 
 var lg = {
@@ -21,16 +21,18 @@ lg.code = function(){
 lg.login = function(){
     var account = $('#account').val();
     var pass = $('#pass').val();
+    var code = $('#codeVal').val();
     $.ajax({
         url : Utils.baseUrl() + 'login/login',
-        data : {account:account,pass:pass},
+        data : {account:account,pass:pass,code:code},
         type : 'post',
         dataType : 'json',
         success : function(result){
             if(result.ret === 1){
                 window.location.href = '../index/index.html';
             } else {
-                alert('账号密码错误');
+                lg.code();
+                alert(result.msg);
             }
         }
     })

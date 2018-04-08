@@ -36,11 +36,12 @@ public class MyRealm extends AuthorizingRealm {
     // 权限认证
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println(super.getAvailablePrincipal(principalCollection));
         System.out.println("-------------------------> ");
+        System.out.println(super.getAvailablePrincipal(principalCollection));
         System.out.println(principalCollection.getPrimaryPrincipal());
         System.out.println(principalCollection.getRealmNames());
         System.out.println(principalCollection.fromRealm(getName()).iterator().next());
+        System.out.println("-------------------------> ");
 
         String account  = principalCollection.getPrimaryPrincipal().toString();
         Account acct = accountService.get4Account(account);
@@ -54,8 +55,8 @@ public class MyRealm extends AuthorizingRealm {
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setStringPermissions(authzKey);
-        System.out.println("------------> " + info);
-        System.out.println("============> " + authzKey);
+        System.out.println("------------> info: " + info);
+        System.out.println("============> authzKey: " + authzKey);
         return info;
     }
 

@@ -6,6 +6,7 @@ import com.bgee.security.entity.Account;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
 import com.bgee.security.util.SessionUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -30,6 +31,9 @@ import java.util.Random;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
+    private static final String LOGIN_CODE = "loginCode";
+
     private Log log = LogFactory.getLog(this.getClass());
 
     @Resource
@@ -38,9 +42,16 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public R login(String account, String pass){
+    public R login(String account, String pass, String code){
         try {
-            //
+            // 判断验证码
+            String sCode = (String)SessionUtil.get(LOGIN_CODE);
+            if(StringUtils.isBlank(code)
+                    || StringUtils.isBlank(sCode)
+                    || !sCode.equals(code)){
+                return new R(0,"验证码不正确");
+            }
+
             Subject subject  = SecurityUtils.getSubject();
             if(subject.isAuthenticated()){
                 return new R(1,"登陸成功");
@@ -108,16 +119,13 @@ public class LoginController {
                 if (i == 0) {
                     g.drawString(index+"", (i*15)+3, 18);
                     firstNum = index;
-                }
-                else if (i == 2) {
+                } else if (i == 2) {
                     g.drawString(index+"", (i*15)+3, 18);
                     secondNum = index;
-                }
-                else if (i == 1) {
+                } else if (i == 1) {
                     g.drawString(op[index]+"", (i*15)+3, 18);
                     operation = op[index];
-                }
-                else {
+                }  else {
                     g.drawString("=", (i*15)+3, 18);
                 }
             }
@@ -125,7 +133,7 @@ public class LoginController {
             if (operation == '+') result = firstNum+secondNum;
             else if (operation == '-') result = firstNum-secondNum;
             else if (operation == '*') result = firstNum*secondNum;
-            SessionUtil.set("loginCode",result);
+            SessionUtil.set(LOGIN_CODE,result + "");
             ImageIO.write(bi, "JPG", response.getOutputStream());
         } catch(IOException ioe){
             log.error("LoginController, code, ioe,",ioe);
