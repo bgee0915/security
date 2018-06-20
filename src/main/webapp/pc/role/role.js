@@ -20,11 +20,10 @@ Role.list = function(){
         success:function(result){
             var tables = $.fn.lx.tables;
             tables.setting = {
-                head:['id','角色名','key值','操作'],
+                head:['角色名','key值','操作'],
                 data:result.data,
                 value:function(item){
                     return [
-                        item.id,
                         item.name,
                         item.keys,
                         (function(id){

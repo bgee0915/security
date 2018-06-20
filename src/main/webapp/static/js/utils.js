@@ -52,13 +52,7 @@ Utils.getCookie = function(name){
     return "";
 };
 
-
 // 检查手机号
 Utils.check.validTel = function(tel){
-    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-    if (myreg.test(tel)) {
-        return true;
-    } else {
-        return false;
-    }
+    return /^[1][3,4,5,7,8][0-9]{9}$/.test(tel);
 };

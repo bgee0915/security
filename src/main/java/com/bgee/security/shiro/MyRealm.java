@@ -62,7 +62,7 @@ public class MyRealm extends AuthorizingRealm {
 
     // 登录认证
     @Override
-        protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {
         String account = (String)token.getPrincipal();
         String pass = String.valueOf((char[])token.getCredentials());
         Account acct = accountService.getAccountPass(account,pass);

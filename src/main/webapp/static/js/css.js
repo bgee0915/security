@@ -11,13 +11,14 @@ $.fn.lx = {
             var setting = $.fn.lx.tables.setting;
             var html = '';
             html += '<table id="l_lx_tb"><thead><tr>';
+            html += '<th>No</th>';
             $.each(setting.head,function(index,item){
                 html += '<th>' + item + '</th>';
             });
             html += '</tr></thead>';
             html += '<tbody>';
             $.each(setting.data,function(dataIndex,dataItem){
-                html += '<tr>';
+                html += '<tr><td>'+ (dataIndex + 1) +'</td>';
                 $.each(setting.value(dataItem),function(valueIndex,valueItem){
                    html += '<td>' + valueItem + '</td>';
                 });

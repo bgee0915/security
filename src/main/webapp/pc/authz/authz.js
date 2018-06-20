@@ -34,11 +34,10 @@ Authz.list = function(){
 
             var tables = $.fn.lx.tables;
             tables.setting = {
-                head:['id','模块名','权限名','key', '操作'],
+                head:['模块名','权限名','key', '操作'],
                 data:resultData,
                 value:function(item){
                     return [
-                        item.id,
                         (function(item){
                             if(item.pid === 0){
                                 return item.name;

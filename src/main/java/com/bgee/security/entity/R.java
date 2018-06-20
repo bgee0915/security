@@ -1,6 +1,7 @@
 package com.bgee.security.entity;
 
 public class R {
+    /** 1:true  0:false  */
     private Integer ret;
     private Boolean success;
     private Object data;

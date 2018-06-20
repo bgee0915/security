@@ -21,11 +21,10 @@ Acct.list = function(){
         success:function(result){
             var tables = $.fn.lx.tables;
             tables.setting = {
-                head:['id','账号','手机号码','性别', '创建时间','创建人','操作'],
+                head:['账号','手机号码','性别', '创建时间','创建人','操作'],
                 data:result.data,
                 value:function(item){
                     return [
-                        item.id,
                         item.account,
                         item.tel,
                         item.sex === 0 ? '女':'男',

@@ -2,6 +2,7 @@ package com.bgee.security.ctrl;
 
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
+import com.bgee.security.annotation.LPerm;
 import com.bgee.security.entity.Account;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
@@ -98,6 +99,7 @@ public class LoginController {
      * @param response
      */
     @RequestMapping("/code")
+    @LPerm("aaa")
     public void code(HttpServletRequest request, HttpServletResponse response){
         try {
             BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_RGB);
