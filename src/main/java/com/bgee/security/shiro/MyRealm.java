@@ -70,7 +70,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new UnknownAccountException("账号密码错误");
         }
 
-        SessionUtil.set(SessionConstants.SESSION_ACCOUNT,acct);
+        SessionUtil.setAcct(acct);
         return new SimpleAuthenticationInfo(acct.getAccount(),pass,getName());
     }
 }

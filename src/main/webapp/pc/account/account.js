@@ -1,7 +1,5 @@
 $(function(){
     Acct.list();
-
-    console.log('---aaaaaa');
 });
 
 

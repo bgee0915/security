@@ -23,8 +23,7 @@ import java.util.List;
 public class RoleController {
     private Log log = LogFactory.getLog(this.getClass());
 
-    @Resource
-    private RoleService roleService;
+    @Resource private RoleService roleService;
 
     @ResponseBody
     @RequestMapping("/get")
@@ -32,7 +31,7 @@ public class RoleController {
         try {
             return new R(1,roleService.get(id),true);
         } catch (Exception e){
-            log.error("RoleController, get, e, " , e);
+            log.error("RoleController, get, id=" + id + ",   e:" , e);
             return new R(0,e.getMessage(),false);
         }
     }

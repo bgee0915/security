@@ -4,9 +4,11 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.annotation.LPerm;
 import com.bgee.security.entity.Account;
+import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.R;
 import com.bgee.security.service.AccountService;
 import com.bgee.security.util.SessionUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -27,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -87,8 +91,14 @@ public class LoginController {
     public R accountAuthz (){
         try{
             Account account = SessionUtil.getAcct();
-            return new R(1,accountService.accountAuthz(account.getId()),true);
+            List<Authz> authzList = SessionUtil.getAuthz();
+            if(CollectionUtils.isEmpty(authzList)){
+                authzList = accountService.accountAuthz(account.getId());
+                SessionUtil.setAuthz(authzList);
+            }
+            return new R(1,authzList,true);
         }catch (Exception e){
+            log.error("LoginController, accountAuthz, e:",e);
             return new R(0,e.getMessage());
         }
     }
