@@ -4,8 +4,11 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.bgee.security.constants.SessionConstants;
 import com.bgee.security.entity.Account;
+import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.R;
 import com.bgee.security.entity.Role;
+import com.bgee.security.service.AccountService;
+import com.bgee.security.service.AuthzService;
 import com.bgee.security.service.RoleService;
 import com.bgee.security.util.SessionUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -24,6 +27,7 @@ public class RoleController {
     private Log log = LogFactory.getLog(this.getClass());
 
     @Resource private RoleService roleService;
+
 
     @ResponseBody
     @RequestMapping("/get")
@@ -78,7 +82,8 @@ public class RoleController {
     @RequiresPermissions("a_role_del")
     public R del(Integer id){
         try {
-            return new R(roleService.delete(id),"");
+            int result = roleService.delete(id);
+            return new R(result,"");
         } catch (Exception e){
             log.error("RoleController, del, e, " , e);
             return new R(0,e.getMessage(),false);
@@ -95,7 +100,7 @@ public class RoleController {
                 return new R(roleService.insertRoleInfo(role, authz),"");
             } else {
                 log.error("RoleController, add, 存在的keys");
-               return new R(0,"存在的keys");
+                return new R(0,"存在的keys");
             }
         } catch (Exception e){
             log.error("RoleController, add, e, " , e);
@@ -108,7 +113,8 @@ public class RoleController {
     @RequiresPermissions("a_role_edit")
     public R edit(Role role, @RequestParam(value="authz[]")Integer []authz){
         try {
-            return new R(roleService.updateRoleInfo(role,authz),"");
+            int result = roleService.updateRoleInfo(role,authz);
+            return new R(result,"");
         } catch (Exception e){
             log.error("RoleController, edit, e, " , e);
             return new R(0,e.getMessage(),false);

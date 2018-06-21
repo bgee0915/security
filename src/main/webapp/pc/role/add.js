@@ -47,7 +47,7 @@ Add.authzList = function(){
 
 Add.fill = function(){
     var authz = Add.data.authz;
-    if(authz && authz != 'undefined'){
+    if(authz && authz !== 'undefined'){
         var html = '';
         for(var i=0; i<authz.length; i++){
             var a = authz[i];

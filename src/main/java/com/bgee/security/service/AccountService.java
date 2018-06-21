@@ -7,7 +7,9 @@ import com.bgee.security.entity.Account;
 import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.Role;
 import com.bgee.security.entity.dto.AccountDto;
+import com.bgee.security.util.SessionUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -18,10 +20,8 @@ import java.util.Set;
 public class AccountService {
     private Log log = LogFactory.getLog(this.getClass());
 
-    @Resource
-    private AccountDao accountDao;
-    @Resource
-    private RoleService roleService;
+    @Resource private AccountDao accountDao;
+    @Resource private RoleService roleService;
 
     public Account get(Integer id){
         return accountDao.get(id);
@@ -49,6 +49,7 @@ public class AccountService {
 
     public int del(Integer id){return accountDao.del(id); }
 
+    @Transactional
     public int delete(Integer id){
         int result1 = del(id);
         int result2 = roleService.delAccountRole(id,null);
@@ -57,17 +58,25 @@ public class AccountService {
 
     public int update(Account account){return accountDao.update(account);}
 
+    @Transactional
     public int updateAcctInfo(Account account, Integer roles[]){
         int result1 = roleService.delAccountRole(account.getId(),null);
         int result2 = insertAcctRoles(account.getId(),roles);
         int result3 = update(account);
-        return result1 > 0 && result2 > 0 && result3 > 0 ? 1 : 0;
+
+        if(result1 > 0 && result2 > 0 && result3 > 0){
+            SessionUtil.setRole(roleService.accountRole(SessionUtil.getAcct().getId()));    // 如果的话 更新用户的角色
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public int insert(Account account){return accountDao.insert(account);}
 
     public int insertAcctRoles(Integer accountId, Integer roles[]){return accountDao.insertAcctRoles(accountId,roles);}
 
+    @Transactional
     public int insertAcctInfo(Account account, Integer roles[]){
         int result1 = insert(account);
         int result2 = insertAcctRoles(account.getId(),roles);

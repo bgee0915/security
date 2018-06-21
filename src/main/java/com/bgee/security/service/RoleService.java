@@ -1,8 +1,10 @@
 package com.bgee.security.service;
 
 import com.bgee.security.dao.RoleDao;
+import com.bgee.security.entity.Authz;
 import com.bgee.security.entity.Role;
 import com.bgee.security.entity.dto.RoleDto;
+import com.bgee.security.util.SessionUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,11 +13,9 @@ import java.util.List;
 
 @Service
 public class RoleService {
-    @Resource
-    private RoleDao roleDao;
-
-    @Resource
-    private AuthzService authzService;
+    @Resource private RoleDao roleDao;
+    @Resource private AuthzService authzService;
+    @Resource private AccountService accountService;
 
     public Role get(Integer id){return roleDao.get(id);}
 
@@ -37,6 +37,7 @@ public class RoleService {
 
     public int insertRoleAuthz(Integer roleId, Integer authz[]){return roleDao.insertRoleAuthz(roleId,authz);}
 
+    @Transactional
     public int insertRoleInfo(Role role, Integer authz[]){
         int result1 = insert(role);
         int result2 = insertRoleAuthz(role.getId(),authz);
@@ -45,11 +46,19 @@ public class RoleService {
 
     public int update(Role role){return roleDao.update(role);}
 
+    // TODO  留下并集, 删除 & 新增
+    @Transactional
     public int updateRoleInfo(Role role, Integer authz[]){
         int result1 = authzService.delRoleAuthz(role.getId(),null);
         int result2 = insertRoleAuthz(role.getId(),authz);
         int result3 = update(role);
-        return result1 > 0 && result2 > 0 && result3 > 0 ? 1 : 0;
+
+        if(result1 > 0 && result2 > 0 && result3 > 0){
+            SessionUtil.setAuthz(accountService.accountAuthz(SessionUtil.getAcct().getId())); // 如果的话，更新用户SESSION里的权限.
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     // update role status
@@ -69,7 +78,15 @@ public class RoleService {
         int result1 = del(id);
         int result2 = delRole(id);
         int result3 = authzService.delRoleAuthz(id,null);
-        return result1 > 0 && result2 > 0  && result3 > 0 ? result1 : 0;
+        if(result1 > 0 && result2 > 0  && result3 > 0 ){
+            SessionUtil.setAuthz(accountService.accountAuthz(SessionUtil.getAcct().getId())); // 如果的话，更新用户SESSION里的的权限
+            return 1;
+        } else {
+            return 0;
+        }
     }
+
+
+
 
 }

@@ -3,6 +3,7 @@ package com.bgee.security.util;
 import com.bgee.security.constants.SessionConstants;
 import com.bgee.security.entity.Account;
 import com.bgee.security.entity.Authz;
+import com.bgee.security.entity.Role;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -52,6 +53,15 @@ public class SessionUtil {
 
     public static Account getAcct(){
         return (Account) get(SessionConstants.SESSION_ACCOUNT);
+    }
+
+    public static HttpSession setRole(List<Role> roleList){
+        set(SessionConstants.SESSION_ACCOUNT_ROLE,roleList);
+        return session;
+    }
+
+    public static List<Role> getROle(){
+        return (List<Role>) get(SessionConstants.SESSION_ACCOUNT_ROLE);
     }
 
     public static HttpSession setAuthz(List<Authz> authzList){

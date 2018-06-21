@@ -86,6 +86,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * 账号权限
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/accountAuthz")
     public R accountAuthz (){
