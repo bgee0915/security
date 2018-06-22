@@ -1,27 +1,26 @@
 $(function(){
-    Menu.list();
+    Left.list();
 });
 
-var Menu = {
-    list:function(){}
+var Left = {
+    list:function(){},
+    skip:function(obj){} //跳转
 };
 
-Menu.list = function(){
+Left.list = function(){
     $.ajax({
         url:Utils.baseUrl() + 'menu/list',
         data:'',
         type:'post',
         dataType:'json',
         success:function(result){
-            console.log(result);
             if(result.ret === 1){
                 var html = '';
                 $.each(result.data,function(index,item){
-                    html += '<div class="l_divli pm ' + item.perm + '" data-url="' + item.url + '">';
+                    html += '<div onclick="Left.skip(this);" class="l_divli pm ' + item.perm + '" data-url="' + item.url + '">';
                     html += '<span>' + item.name + '</span>';
                     html += '</div>';
                 });
-                console.log(html);
                 $('#menu').append(html);
             } else {
                 console.log('获取菜单列表信息失败, reuslt,');
@@ -31,10 +30,10 @@ Menu.list = function(){
     })
 };
 
-// 菜单点击事件
-$('.l_divli').click(function(){
-    $('#l_ifram').attr('src',$(this).attr('data-url'));
-});
+Left.skip = function(obj){
+    $('#l_ifram').attr('src',$(obj).attr('data-url'));
+};
+
 
 
 
