@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单添加</title>
+    <link href="../../static/css/public.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="l_pub_save_div">
+        <div>
+            <label>名字：</label>
+            <input type="text" id="name" />
+        </div>
+        <div>
+            <label>上级菜单：</label>
+            <select class="l_pub_df_sel" id="pid"></select>
+        </div>
+        <div>
+            <label>路径：</label>
+            <input type="text" id="url" />
+        </div>
+        <div>
+            <label>权限key：</label>
+            <input type="text" id="perm" />
+        </div>
+        <div>
+            <label>类型：</label>
+            <select class="l_pub_df_sel" id="type">
+                <option value="0">目录</option>
+                <option value="1">菜单</option>
+            </select>
+        </div>
+        <div>
+            <label>图标：</label>
+            <input type="text" id="icon" />
+        </div>
+
+        <div id="xxx"></div>
+
+        <button class="l_pub_y_bt" onclick="Add.add();">添加</button>
+        <button class="l_pub_n_bt" onclick="Add.cancel();">取消</button>
+    </div>
+
+    <script src="../../static/plugin/jquery/jquery-3.3.1.js"></script>
+    <script src="../../static/js/css.js"></script>
+    <script src="../../static/js/utils.js"></script>
+    <script src="add.js"></script>
+</body>
+</html>

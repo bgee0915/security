@@ -35,7 +35,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginCtrl {
 
     private static final String LOGIN_CODE = "loginCode";
 
@@ -113,7 +113,6 @@ public class LoginController {
      * @param response
      */
     @RequestMapping("/code")
-    @LPerm("aaa")
     public void code(HttpServletRequest request, HttpServletResponse response){
         try {
             BufferedImage bi = new BufferedImage(68, 22, BufferedImage.TYPE_INT_RGB);

@@ -66,3 +66,32 @@ Menu.list = function(){
         }
     })
 };
+
+Menu.toAdd = function(){
+    window.location.href = 'add.html';
+};
+
+Menu.toEdit = function(id){
+    window.location.href = 'edit.html?id=' + id;
+};
+
+Menu.del = function(id){
+    var delRst = confirm('确定要删除此菜单吗?');
+    if(delRst){
+      $.ajax({
+          url: Utils.baseUrl() + 'menu/del',
+          data:{id:id},
+          dataType:'json',
+          type:'post',
+          success:function(result){
+            if(result.ret === 1){
+                alert('删除成功');
+            } else {
+                alert('删除失败');
+                console.log('删除失败:');
+                console.log(result.msg);
+            }
+          }
+      })
+    }
+};

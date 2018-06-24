@@ -10,8 +10,7 @@ import java.util.List;
 
 @Service
 public class AuthzService {
-    @Resource
-    private AuthzDao authzDao;
+    @Resource private AuthzDao authzDao;
 
 
     public Authz get(Integer id){return authzDao.get(id);}

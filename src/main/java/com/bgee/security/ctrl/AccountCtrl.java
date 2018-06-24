@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/account")
-public class AccountController {
+public class AccountCtrl {
     private Log log = LogFactory.getLog(this.getClass());
 
     @Resource

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/authz")
-public class AuthzController {
+public class AuthzCtrl {
     private Log log = LogFactory.getLog(this.getClass());
 
     @Resource

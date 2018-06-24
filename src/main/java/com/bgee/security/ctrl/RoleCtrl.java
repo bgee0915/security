@@ -23,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/role")
-public class RoleController {
+public class RoleCtrl {
     private Log log = LogFactory.getLog(this.getClass());
 
     @Resource private RoleService roleService;
