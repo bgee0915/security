@@ -7,11 +7,11 @@
 
     <style>
         .icon_tops{
-            position:relative;
+            position: absolute;display:inline-flex;margin: 8px 0px 0px 4px;
         }
 
         .icon_without{
-            display:inline-grid;position:absolute;margin-left: 4px;margin-top:8px;
+            display:inline-grid;
         }
 
         .icon_input{
@@ -19,8 +19,13 @@
         }
 
         .icon_border{
-            width:157px;border:1px solid #ccc;display:none;position:relative;
+            width:157px;border:1px solid #ccc;display:none;position:relative;margin-top:1px;
         }
+
+        .icon_sel_show{
+            width:26px;height:26px;padding-left:8px;display:none;
+        }
+
     </style>
 </head>
 <body>
@@ -48,11 +53,14 @@
                 <option value="1">菜单</option>
             </select>
         </div>
-        <div class="icon_tops">
+        <div >
             <label>图标：</label>
-            <div class="icon_without">
-                <input class="icon_input" onclick="Add.clickIconInput();" onblur="Add.iconInputBlur();" type="text" id="icon" placeholder=" ---- 请选择图片 ----" />
-                <div id="icon_lists" class="icon_border"></div>
+            <div class="icon_tops">
+                <div class="icon_without">
+                    <input id="icon_url" class="icon_input" onclick="Add.clickIconInput();" onblur="Add.iconInputBlur();" type="text" id="icon" placeholder=" ---- 请选择图片 ----" />
+                    <div id="icon_lists" class="icon_border"></div>
+                </div>
+                <img src="/security/static/img/icon/set.png" class="icon_sel_show"  id="iconImg" />
             </div>
         </div>
 

@@ -4,15 +4,16 @@ $(function(){
 
 
 var Add = {
-    icons           :   function(){},
-    pMenus          :   function(){},     // 父菜单
-    add             :   function(menu){}, // 添加
-    fill            :   function(){},     // 填充信息
-    init            :   function(){},     // 初始化
-    clickIconInput  :   function(){},     // 展示图片
-    iconInputBlur   :   function(){},     // 离开焦点
+    init            :   function(){},        // 初始化
+    icons           :   function(){},        // 图片列表
+    pMenus          :   function(){},        // 父菜单
+    add             :   function(menu){},    // 添加
+    fill            :   function(){},        // 填充信息
+    clickIconInput  :   function(){},        // 点击展示图片
+    iconInputBlur   :   function(){},        // 离开焦点
+    iconSel         :   function(obj){},     // 图片点击选择
     data            : {
-        iconsList   :   '',
+        iconsList   :   '',         //  图片列表
         pMenuList   :   ''          //  父菜单
     }
 };
@@ -55,11 +56,11 @@ Add.fill = function(){
         $('#pid').html(pMenuHtml);
     }
 
-    // icons
+    // 填充 icons
     if(Add.data.iconsList && Add.data.iconsList.length > 0){
         var iconsHtml = '';
         $.each(Add.data.iconsList,function(index, item){
-            iconsHtml += '<img class="l_pub_img_icons" src="' + Utils.baseUrl() + item.url + '" />';
+            iconsHtml += '<img class="l_pub_img_icons" src="' + Utils.baseUrl() + item.url + '" data-url="'+ item.url +'"  onclick="Add.iconSel(this);" />';
         });
         $('#icon_lists').html(iconsHtml);
     }
@@ -92,5 +93,16 @@ Add.clickIconInput = function(){
 };
 
 Add.iconInputBlur = function(){
+};
+
+Add.iconSel = function(obj){
+    var _this = $(obj);
+    $('#icon_url').val(_this.attr('data-url'));
+    $('#iconImg').prop('src',Utils.baseUrl() + _this.attr('data-url'));
+    $('#iconImg').show();
     $('#icon_lists').hide();
+};
+
+Add.add = function(){
+
 };
