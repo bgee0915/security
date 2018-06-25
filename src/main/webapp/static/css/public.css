@@ -56,8 +56,17 @@
     font-size: 16px;
 }
 
+/** 下拉框样式 */
 .l_pub_df_sel{
     height: 25px;
     width: 200px;
     border-radius: 3px;
+}
+
+/** icons 图标 */
+.l_pub_img_icons{
+    width:26px;
+    height:26px;
+    border:1px solid #999;
+    margin:3px 0px -5px 3px;
 }
