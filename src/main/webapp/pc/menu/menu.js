@@ -20,13 +20,19 @@ Menu.list = function(){
             if(result.ret === 1){
                 var tables = $.fn.lx.tables;
                 tables.setting = {
-                    head    :   ['菜单','url','权限key','类型','图标','排序','操作'],
+                    head    :   ['菜单','url','权限key','类型','图标','操作'],
                     data    :   result.data,
                     value   :   function(item){
                         return [
                             item.name,
-                            item.url,
-                            item.perm,
+
+                                (function(url){ // url 地址
+                                    return url ? url : '';
+                                })(item.url),
+
+                                (function(perm){ // perm 权限key
+                                    return perm ? perm : '';
+                                })(item.perm),
 
                                 (function(type){ // type 类型
                                     var typeName = '';
@@ -42,11 +48,13 @@ Menu.list = function(){
                                     return typeName;
                                 })(item.type),
 
-                                (function(item){ // icon 图标
-                                    return item?item:'无';
+                                (function(icon){ // icon 图标
+                                    if(icon){
+                                        return '<img class="l_list_icon" src="' + Utils.baseUrl() + icon + '" />';
+                                    } else {
+                                        return '';
+                                    }
                                 })(item.icon),
-
-                            item.seq,
 
                                 (function(id){ // 操作
                                     var html = '';
@@ -86,6 +94,7 @@ Menu.del = function(id){
           success:function(result){
             if(result.ret === 1){
                 alert('删除成功');
+                Menu.list();
             } else {
                 alert('删除失败');
                 console.log('删除失败:');

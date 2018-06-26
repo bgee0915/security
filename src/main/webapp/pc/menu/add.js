@@ -104,5 +104,64 @@ Add.iconSel = function(obj){
 };
 
 Add.add = function(){
+    var name = $('#name').val();
+    var pid = $('#pid').val();
+    var url = $('#url').val();
+    var perm = $('#perm').val();
+    var type = $('#type').val();
+    var icon_url = $('#icon_url').val();
+
+    if(!name){
+        alert('名字不能为空！');
+        return false;
+    }
+    if(!pid){
+        alert('父菜单不能为空！');
+        return false;
+    }
+    if(!url){
+        alert('地址不能为空！');
+        return false;
+    }
+    if(!perm){
+        alert('权限不能为空！');
+        return false;
+    }
+    if(!type){
+        alert('类型不能为空！');
+        return false;
+    }
+    if(!icon_url){
+        alert('图标不能为空！');
+        return false;
+    }
+
+    var data = {
+        pid     :   pid,
+        name    :   name,
+        url     :   url,
+        perm    :   perm,
+        type    :   type,
+        icon    :   icon_url
+    };
+
+    $.ajax({
+        url     :   Utils.baseUrl() + 'menu/add',
+        data    :   data,
+        type    :   'post',
+        dataType:   'json',
+        success :   function(result){
+            if(result.ret === 1){
+                alert('添加成功');
+                setTimeout(function(){
+                    window.location.href = 'menu.html';
+                },1000);
+            } else {
+                alert('添加失败');
+                console.log('添加菜单失败, result:');
+                console.log(result);
+            }
+        }
+    })
 
 };
