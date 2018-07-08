@@ -10,7 +10,6 @@ var Add = {
     add             :   function(menu){},    // 添加
     fill            :   function(){},        // 填充信息
     clickIconInput  :   function(){},        // 点击展示图片
-    iconInputBlur   :   function(){},        // 离开焦点
     iconSel         :   function(obj){},     // 图片点击选择
     data            : {
         iconsList   :   '',         //  图片列表
@@ -92,8 +91,6 @@ Add.clickIconInput = function(){
     }
 };
 
-Add.iconInputBlur = function(){
-};
 
 Add.iconSel = function(obj){
     var _this = $(obj);

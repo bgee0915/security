@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>菜单添加</title>
+    <title>菜单修改</title>
     <link href="../../static/css/public.css" rel="stylesheet" type="text/css"/>
 
     <style>
@@ -25,7 +25,6 @@
         .icon_sel_show{
             width:26px;height:26px;padding-left:8px;display:none;
         }
-
     </style>
 </head>
 <body>
@@ -57,20 +56,20 @@
             <label>图标：</label>
             <div class="icon_tops">
                 <div class="icon_without">
-                    <input id="icon_url" class="icon_input" onclick="Add.clickIconInput();"   type="text" id="icon" placeholder=" ---- 请选择图片 ----" />
+                    <input id="icon_url" class="icon_input" onclick="Edit.clickIconInput();"  type="text" id="icon" placeholder=" ---- 请选择图片 ----" />
                     <div id="icon_lists" class="icon_border"></div>
                 </div>
                 <img src="/security/static/img/icon/set.png" class="icon_sel_show"  id="iconImg" />
             </div>
         </div>
 
-        <button class="l_pub_y_bt" onclick="Add.add();">添加</button>
-        <button class="l_pub_n_bt" onclick="Add.cancel();">取消</button>
+        <button class="l_pub_y_bt" onclick="Edit.edit();">添加</button>
+        <button class="l_pub_n_bt" onclick="Edit.cancel();">取消</button>
     </div>
 
     <script src="../../static/plugin/jquery/jquery-3.3.1.js"></script>
     <script src="../../static/js/css.js"></script>
     <script src="../../static/js/utils.js"></script>
-    <script src="add.js"></script>
+    <script src="edit.js"></script>
 </body>
 </html>

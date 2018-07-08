@@ -75,4 +75,15 @@ public class MenuCtrl {
             return new R(0,"修改失败",false);
         }
     }
+
+    @ResponseBody
+    @RequestMapping("get")
+    public R get(Integer id){
+        try{
+            return new R(1,menuService.get(id),true);
+        }catch(Exception e){
+            log.error("MenuController,get,e:",e);
+            return new R(0,"获取失败",false);
+        }
+    }
 }
