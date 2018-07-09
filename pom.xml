@@ -23,6 +23,7 @@
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>false</enabled></snapshots>
     </repository>
+
   </repositories>
 
   <properties>
@@ -31,12 +32,51 @@
     <spring.version>4.3.13.RELEASE</spring.version>
     <!-- mybatis版本号 -->
     <mybatis.version>3.3.0</mybatis.version>
-    <!-- log4j日志文件管理包版本 -->
+    <!-- mybatis-spring -->
+    <mybatis-spring.version>1.2.2</mybatis-spring.version>
+    <!-- slf4j -->
     <slf4j.version>1.7.7</slf4j.version>
+    <!-- log4j -->
     <log4j.version>1.2.17</log4j.version>
+    <!-- junit -->
     <junit.version>4.12</junit.version>
+    <!-- j2ee api -->
+    <j2ee-api.version>7.0</j2ee-api.version>
+    <!-- mysql-connection -->
+    <mysql-conn.version>5.1.30</mysql-conn.version>
+    <!-- commons-dbcp -->
+    <commons-dbcp.version>1.2.2</commons-dbcp.version>
+    <!-- druid -->
+    <druid.version>1.0.28</druid.version>
+    <!-- jstl -->
+    <jstl.version>1.2</jstl.version>
+    <!-- fastjson -->
+    <fastjson.version>1.1.41</fastjson.version>
+    <!-- jackson-core -->
+    <jackson-core.version>2.8.7</jackson-core.version>
+    <!-- jackson-core-asl -->
+    <jackson-core-asl.version>1.9.13</jackson-core-asl.version>
+    <!-- commons-fileupload -->
+    <commons-fileupload.version>1.3.1</commons-fileupload.version>
+    <!-- commons-io -->
+    <commons-io.version>2.4</commons-io.version>
+    <!-- commons-codec -->
+    <commons-codec.version>1.9</commons-codec.version>
+    <!-- commons-lang3 -->
+    <commons-lang3.version>3.4</commons-lang3.version>
+    <!-- gson -->
+    <gson.version>2.8.2</gson.version>
+    <!-- aspectjweaver -->
+    <aspectjweaver.version>RELEASE</aspectjweaver.version>
+    <!-- jedis -->
+    <jedis.version>2.8.0</jedis.version>
+    <!-- spring-data-redis -->
+    <spring-data-redis.version>1.6.4.RELEASE</spring-data-redis.version>
     <!-- shiro -->
     <shiro.version>1.4.0</shiro.version>
+    <!-- es -->
+    <es.version>6.2.3</es.version>
+
   </properties>
 
   <dependencies>
@@ -114,41 +154,41 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>1.2.2</version>
+      <version>${mybatis-spring.version}</version>
     </dependency>
 
     <!-- 导入java ee jar 包 -->
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
+      <version>${j2ee-api.version}</version>
     </dependency>
 
     <!-- 导入Mysql数据库链接jar包 -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.30</version>
+      <version>${mysql-conn.version}</version>
     </dependency>
 
     <dependency>
       <groupId>commons-dbcp</groupId>
       <artifactId>commons-dbcp</artifactId>
-      <version>1.2.2</version>
+      <version>${commons-dbcp.version}</version>
     </dependency>
 
     <!-- druid -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>1.0.28</version>
+      <version>${druid.version}</version>
     </dependency>
 
     <!-- JSTL标签类 -->
     <dependency>
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <version>${jstl.version}</version>
     </dependency>
 
     <!-- 日志文件管理包 -->
@@ -162,7 +202,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.1.41</version>
+      <version>${fastjson.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -176,76 +216,91 @@
     </dependency>
     <!-- log end -->
 
+    <!-- gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
+
+    <!-- jackson -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.8.7</version>
+      <version>${jackson-core.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.8.7</version>
+      <version>${jackson-core.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>2.8.7</version>
+      <version>${jackson-core.version}</version>
     </dependency>
 
+    <!-- jackson-core-asl -->
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-core-asl</artifactId>
-      <version>1.9.13</version>
+      <version>${jackson-core-asl.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
-      <version>1.9.13</version>
+      <version>${jackson-core-asl.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-lgpl</artifactId>
-      <version>1.9.12</version>
+      <version>${jackson-core-asl.version}</version>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.codehaus.jackson</groupId>-->
+      <!--<artifactId>jackson-mapper-lgpl</artifactId>-->
+      <!--<version>1.9.12</version>-->
+    <!--</dependency>-->
+
 
     <!-- 上传组件包 -->
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
-      <version>1.3.1</version>
+      <version>${commons-fileupload.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.4</version>
+      <version>${commons-io.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <version>1.9</version>
+      <version>${commons-codec.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
+      <version>${commons-lang3.version}</version>
     </dependency>
 
     <!-- redis -->
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
-      <version>2.8.0</version>
+      <version>${jedis.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-redis</artifactId>
-      <version>1.6.4.RELEASE</version>
+      <version>${spring-data-redis.version}</version>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>RELEASE</version>
+      <version>${aspectjweaver.version}</version>
     </dependency>
 
 
@@ -253,7 +308,7 @@
 	<dependency>
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-core</artifactId>
-      <version>1.4.0</version>
+      <version>${shiro.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.shiro</groupId>
@@ -275,10 +330,16 @@
       <artifactId>shiro-ehcache</artifactId>
       <version>${shiro.version}</version>
     </dependency>
- 
 
+    <!-- es client -->
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>transport</artifactId>
+      <version>${es.version}</version>
+    </dependency>
 
   </dependencies>
+
 
   <build>
     <plugins>
