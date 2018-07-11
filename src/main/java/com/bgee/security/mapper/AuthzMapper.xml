@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bgee.security.dao.AuthzDao" >
 
-    <select id="get" resultType="Authz">
+    <select id="get" resultType="com.bgee.security.entity.Authz">
         select * from s_authz where id = #{id} and status = 1
     </select>
 
-    <select id="list" resultType="AuthzDto">
+    <select id="list" resultType="com.bgee.security.entity.dto.AuthzDto">
         select s1.* ,s2.name as pName
         from s_authz as s1
         left join s_authz as s2 on s1.pid = s2.id
@@ -15,7 +15,7 @@
         and s2.status = 1
     </select>
 
-    <select id="getRoleAuthz" resultType="Authz">
+    <select id="getRoleAuthz" resultType="com.bgee.security.entity.Authz">
         select s_authz.*
         from s_role
         left join s_role_authz on s_role.id = s_role_authz.role_id
@@ -29,7 +29,7 @@
         delete from s_authz where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="Authz" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.bgee.security.entity.Authz" useGeneratedKeys="true" keyProperty="id">
         insert into s_authz
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -67,7 +67,7 @@
         </trim>
     </insert>
 
-    <update id="update" parameterType="Authz" >
+    <update id="update" parameterType="com.bgee.security.entity.Authz" >
         update s_authz
         <set >
             <if test="pid != null" >

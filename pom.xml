@@ -38,8 +38,10 @@
     <slf4j.version>1.7.7</slf4j.version>
     <!-- log4j -->
     <log4j.version>1.2.17</log4j.version>
-    <!-- junit -->
-    <junit.version>4.12</junit.version>
+    <!-- junit4 -->
+    <junit4.version>4.12</junit4.version>
+    <!-- junit5 -->
+    <junit5.version>RELEASE</junit5.version>
     <!-- j2ee api -->
     <j2ee-api.version>7.0</j2ee-api.version>
     <!-- mysql-connection -->
@@ -83,10 +85,24 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <version>${junit4.version}</version>
       <!-- 表示开发的时候引入，发布的时候不会加载此包 -->
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${junit5.version}</version>
+    </dependency>
+
+
 
     <!-- spring核心包 -->
     <dependency>
@@ -337,6 +353,7 @@
       <artifactId>transport</artifactId>
       <version>${es.version}</version>
     </dependency>
+
 
   </dependencies>
 
