@@ -75,7 +75,7 @@
     <!-- spring-data-redis -->
     <spring-data-redis.version>1.6.4.RELEASE</spring-data-redis.version>
     <!-- shiro -->
-    <shiro.version>1.4.0</shiro.version>
+    <shiro.version>1.7.1</shiro.version>
     <!-- es -->
     <es.version>6.2.3</es.version>
 
