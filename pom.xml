@@ -53,7 +53,7 @@
     <!-- jstl -->
     <jstl.version>1.2</jstl.version>
     <!-- fastjson -->
-    <fastjson.version>1.1.41</fastjson.version>
+    <fastjson.version>1.2.83</fastjson.version>
     <!-- jackson-core -->
     <jackson-core.version>2.8.7</jackson-core.version>
     <!-- jackson-core-asl -->
