@@ -45,7 +45,7 @@
     <!-- j2ee api -->
     <j2ee-api.version>7.0</j2ee-api.version>
     <!-- mysql-connection -->
-    <mysql-conn.version>5.1.30</mysql-conn.version>
+    <mysql-conn.version>8.0.28</mysql-conn.version>
     <!-- commons-dbcp -->
     <commons-dbcp.version>1.2.2</commons-dbcp.version>
     <!-- druid -->
