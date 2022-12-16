@@ -29,7 +29,7 @@
   <properties>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
     <!-- spring版本号 -->
-    <spring.version>4.3.13.RELEASE</spring.version>
+    <spring.version>5.2.20.RELEASE</spring.version>
     <!-- mybatis版本号 -->
     <mybatis.version>3.3.0</mybatis.version>
     <!-- mybatis-spring -->
